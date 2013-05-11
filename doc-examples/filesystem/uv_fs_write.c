@@ -11,16 +11,14 @@ void on_open(uv_fs_t* req);
 void on_write(uv_fs_t* req);
 void on_close(uv_fs_t* req);
 
-char buf[] = "blablabla";
+char buf[] = "blablabla\n";
 char* path = "uv_fs_write_temp.txt";
 
 int main() {
     loop = uv_default_loop();
 
-    int flag = O_WRONLY | O_CREAT;
-    int mode = S_IRUSR | S_IWUSR;
-
-    int r = uv_fs_open(loop, &open_req, path, flag, mode, on_open);
+    int r = uv_fs_open(loop, &open_req, path, O_WRONLY | O_CREAT, 
+            S_IRUSR | S_IWUSR, on_open);
 
     if (r) {
         fprintf(stderr, "Error opening file: %s.\n", 
@@ -65,4 +63,6 @@ void on_close(uv_fs_t* req) {
     }
 
     uv_fs_req_cleanup(req);
+
+    printf("Successfuly wrote blabla to file.\n");
 }

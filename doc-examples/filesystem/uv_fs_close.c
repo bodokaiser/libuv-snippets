@@ -8,13 +8,18 @@ uv_fs_t close_req;
 
 void on_open(uv_fs_t* req);
 void on_close(uv_fs_t* req);
+    
+char* path = "Makefile";
 
 int main() {
     loop = uv_default_loop();
-
-    char* path = "Makefile";
     
-    uv_fs_open(loop, &open_req, path, O_RDONLY, 0, on_open);
+    int r = uv_fs_open(loop, &open_req, path, O_RDONLY, S_IRUSR, on_open);
+
+    if (r) {
+        fprintf(stderr, "Error on opening file: %s.\n", 
+                uv_strerror(uv_last_error(loop)));
+    }
 
     uv_run(loop, UV_RUN_DEFAULT);
 
@@ -25,24 +30,23 @@ void on_open(uv_fs_t* req) {
     int result = req->result;
 
     if (result == -1) {
-        printf("Error occured while opening file\n");
-    } else {
-        printf("Successfully opened file\n");
-
-        uv_fs_close(loop, &close_req, result, on_close);
+        fprintf(stderr, "Error on opening file: %s.\n", 
+                uv_strerror(uv_last_error(loop)));
     }
 
     uv_fs_req_cleanup(req);
+    uv_fs_close(loop, &close_req, open_req.result, on_close);
 }
 
 void on_close(uv_fs_t* req) {
     int result = req->result;
 
     if (result == -1) {
-        printf("Error occured while closing file\n");
-    } else {
-        printf("successfully closed file\n");
+        fprintf(stderr, "Error on closing file: %s.\n", 
+                uv_strerror(uv_last_error(loop)));
     }
 
     uv_fs_req_cleanup(req);
+
+    printf("Successfully opened and closed a file.\n");
 }
