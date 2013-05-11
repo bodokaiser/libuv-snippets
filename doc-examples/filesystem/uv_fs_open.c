@@ -5,14 +5,14 @@ uv_loop_t* loop;
 
 uv_fs_t open_req;
 
-void on_open(uv_fs_t* req);
+void open_cb(uv_fs_t* req);
 
 char* path = "Makefile";
 
 int main() {
     loop = uv_default_loop();
 
-    int r = uv_fs_open(loop, &open_req, path, O_RDONLY, S_IRUSR, on_open);
+    int r = uv_fs_open(loop, &open_req, path, O_RDONLY, S_IRUSR, open_cb);
 
     if (r) {
         fprintf(stderr, "Error at opening file: %s\n",
@@ -24,7 +24,7 @@ int main() {
     return 0;
 }
 
-void on_open(uv_fs_t* req) {
+void open_cb(uv_fs_t* req) {
     int result = req->result;
 
     if (result == -1) {

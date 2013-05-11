@@ -7,18 +7,18 @@ uv_fs_t open_req;
 uv_fs_t write_req;
 uv_fs_t close_req;
 
-void on_open(uv_fs_t* req);
-void on_write(uv_fs_t* req);
-void on_close(uv_fs_t* req);
+void open_cb(uv_fs_t* req);
+void write_cb(uv_fs_t* req);
+void close_cb(uv_fs_t* req);
 
 char buf[] = "blablabla\n";
-char* path = "uv_fs_write_temp.txt";
+char* path = "uv_fs_write_temp.tmp";
 
 int main() {
     loop = uv_default_loop();
 
     int r = uv_fs_open(loop, &open_req, path, O_WRONLY | O_CREAT, 
-            S_IRUSR | S_IWUSR, on_open);
+            S_IRUSR | S_IWUSR, open_cb);
 
     if (r) {
         fprintf(stderr, "Error opening file: %s.\n", 
@@ -30,7 +30,7 @@ int main() {
     return 0;
 }
 
-void on_open(uv_fs_t* req) {
+void open_cb(uv_fs_t* req) {
     int result = req->result;
 
     if (result == -1) {
@@ -39,10 +39,10 @@ void on_open(uv_fs_t* req) {
     }
 
     uv_fs_req_cleanup(req);
-    uv_fs_write(loop, &write_req, result, buf, sizeof(buf), -1, on_write);
+    uv_fs_write(loop, &write_req, result, buf, sizeof(buf), -1, write_cb);
 }
 
-void on_write(uv_fs_t* req) {
+void write_cb(uv_fs_t* req) {
     int result = req->result;
 
     if (result == -1) {
@@ -51,10 +51,10 @@ void on_write(uv_fs_t* req) {
     }
 
     uv_fs_req_cleanup(req);
-    uv_fs_close(loop, &close_req, open_req.result, on_close);
+    uv_fs_close(loop, &close_req, open_req.result, close_cb);
 }
 
-void on_close(uv_fs_t* req) {
+void close_cb(uv_fs_t* req) {
     int result = req->result;
 
     if (result == -1) {
