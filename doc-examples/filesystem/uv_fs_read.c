@@ -12,7 +12,7 @@ void read_cb(uv_fs_t* req);
 void close_cb(uv_fs_t* req);
 
 char buf[1024];
-char* path = "Makefile";
+const char* path = "Makefile";
 
 int main() {
     loop = uv_default_loop();

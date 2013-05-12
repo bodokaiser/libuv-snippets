@@ -7,7 +7,7 @@ uv_fs_t open_req;
 
 void open_cb(uv_fs_t* req);
 
-char* path = "Makefile";
+const char* path = "Makefile";
 
 int main() {
     loop = uv_default_loop();

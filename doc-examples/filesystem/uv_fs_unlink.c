@@ -12,7 +12,7 @@ void close_cb(uv_fs_t* req);
 void unlink_cb(uv_fs_t* req);
 
 char buf[] = "blablabla\n";
-char* path = "temp.txt";
+const char* path = "temp.txt";
 
 int main() {
     loop = uv_default_loop();

@@ -9,7 +9,7 @@ uv_fs_t close_req;
 void on_open(uv_fs_t* req);
 void on_close(uv_fs_t* req);
     
-char* path = "Makefile";
+const char* path = "Makefile";
 
 int main() {
     loop = uv_default_loop();
