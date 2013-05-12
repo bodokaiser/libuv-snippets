@@ -34,5 +34,5 @@ void open_cb(uv_fs_t* req) {
 
     uv_fs_req_cleanup(req);
     
-    printf("Finished opening file.\n");
+    printf("Successfully opened file.\n");
 }

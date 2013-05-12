@@ -12,7 +12,7 @@ void write_cb(uv_fs_t* req);
 void close_cb(uv_fs_t* req);
 
 char buf[] = "blablabla\n";
-const char* path = "uv_fs_write_temp.tmp";
+const char* path = "write.tmp";
 
 int main() {
     loop = uv_default_loop();

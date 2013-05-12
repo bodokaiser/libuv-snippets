@@ -1,7 +1,15 @@
 LDFLAGS = -luv
 
-all: 	uv_fs_open uv_fs_read uv_fs_write uv_fs_close uv_fs_unlink \
-		uv_fs_mkdir uv_fs_rmdir
+all: \
+	uv_fs_open uv_fs_read uv_fs_write uv_fs_close uv_fs_unlink \
+ 	uv_fs_mkdir uv_fs_rmdir
+
+exec:
+	./uv_fs_open.o && ./uv_fs_read.o && ./uv_fs_write.o && ./uv_fs_close.o && \
+	./uv_fs_unlink.o && ./uv_fs_mkdir.o
+
+clean: 
+	rm -Rf *.o *.tmp
 
 uv_fs_open:
 	$(CC) -o uv_fs_open.o uv_fs_open.c $(LDFLAGS)

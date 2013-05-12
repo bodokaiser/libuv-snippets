@@ -7,7 +7,7 @@ uv_fs_t mkdir_req;
 
 void mkdir_cb(uv_fs_t* req);
 
-const char* path = "testdir";
+const char* path = "dir.tmp";
 
 int main() {
     loop = uv_default_loop();

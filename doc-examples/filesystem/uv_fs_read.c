@@ -63,5 +63,5 @@ void close_cb(uv_fs_t* req) {
 
     uv_fs_req_cleanup(req);
 
-    printf("Finished reading and closing file.\n");
+    printf("Successfully read file.\n");
 }

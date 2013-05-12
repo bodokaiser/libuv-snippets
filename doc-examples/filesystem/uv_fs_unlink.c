@@ -12,7 +12,7 @@ void close_cb(uv_fs_t* req);
 void unlink_cb(uv_fs_t* req);
 
 char buf[] = "blablabla\n";
-const char* path = "temp.txt";
+const char* path = "txt.tmp";
 
 int main() {
     loop = uv_default_loop();
@@ -64,5 +64,5 @@ void unlink_cb(uv_fs_t* req) {
 
     uv_fs_req_cleanup(req);
 
-    printf("Successfuly unlinked file.\n");
+    printf("Successfully unlinked file.\n");
 }
