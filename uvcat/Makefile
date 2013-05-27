@@ -1,4 +1,7 @@
-LDFLAGS = -luv
+LDFLAGS=-luv
 
-all:
-	$(CC) -o main.o main.c $(LDFLAGS)
+build:
+	$(CC) -o cat.o cat.c $(LDFLAGS)
+
+clean:
+	rm ./cat.o
