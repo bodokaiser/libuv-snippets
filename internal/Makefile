@@ -1,4 +1,2 @@
-LDFLAGS = -luv
-
-all:
-	$(CC) -o queue.o queue.c $(LDFLAGS)
+build:
+	$(CC) -o queue.o queue.c

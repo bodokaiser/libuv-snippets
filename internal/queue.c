@@ -1,6 +1,5 @@
-#include <uv.h>
-#include <stdio.h>
 #include "queue.h"
+#include <stdio.h>
 
 /**
  * A pointer to a list node.
