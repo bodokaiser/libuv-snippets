@@ -1,7 +1,7 @@
 LDFLAGS=-luv
 
 build:
-	$(CC) -o cat.o cat.c $(LDFLAGS)
+	$(CC) -o uvcat.o uvcat.c $(LDFLAGS)
 
 clean:
-	rm ./cat.o
+	rm ./uvcat.o

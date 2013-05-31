@@ -16,6 +16,12 @@ void close_cb(uv_fs_t* req);
 int main(int argc, const char** argv) {
     loop = uv_default_loop();
 
+    if (!argv[1]) {
+        printf("Please pass a filename as argument.\n");
+
+        return 1;
+    }
+
     int r = uv_fs_open(loop, &open_req, argv[1], 
             O_RDONLY, S_IRUSR, open_cb);
 
@@ -74,6 +80,5 @@ void close_cb(uv_fs_t* req) {
 
     uv_fs_req_cleanup(req);
 
-    printf("%s\n", open_req.path);
     printf("%s\n", buf);
 }
